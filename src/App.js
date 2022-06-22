@@ -16,24 +16,23 @@ const App = () => {
   const [votes, setVotes] = useState(new Uint8Array(anecdotes.length));
   const handleClick = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
-    console.log(selected);
   };
   const increaseVotes = () => {
-    // setVotes([...votes, (votes[selected] += 1)]);
     const copy = [...votes];
     copy[selected] += 1;
     setVotes(copy);
-    // console.log('selected:', selected);
-    // console.log('copy[selected]:', copy[selected]);
-    console.log('votes', votes);
   };
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p style={{ marginBottom: '20px' }}>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={increaseVotes}>vote</button>
       <Button handleClick={handleClick} />
+      <h2>Anecdote with the most votes</h2>
+      <p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
+      <p>has {Math.max(...votes)} votes</p>
     </div>
   );
 };
